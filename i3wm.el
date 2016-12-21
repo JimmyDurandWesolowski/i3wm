@@ -18,6 +18,8 @@
 (require 'json)
 (require 'cl-lib)
 
+;;; Primitive functions:
+
 (defun i3wm-command (command &rest arguments)
   "I3wm-command COMMAND &rest ARGUMENTS.
 
@@ -46,6 +48,20 @@ List all outputs."
 Retrieve i3 version."
   (json-read-from-string
    (shell-command-to-string "i3-msg -t get_version")))
+
+;;; i3 commands
+
+(defun i3wm-exec (program)
+  "I3wm-exec PROGRAM.
+
+Executes the given PROGRAM."
+  (i3wm-command "exec %s" program))
+
+(defun i3wm-exec-no-startup-id (program)
+  "I3wm-exec-no-startup-id PROGRAM.
+
+Execute the given PROGRAM with --no-startup-id."
+  (i3wm-command "exec --no-startup-id %s" program))
 
 (provide 'i3wm)
 
