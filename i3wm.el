@@ -63,6 +63,66 @@ Executes the given PROGRAM."
 Execute the given PROGRAM with --no-startup-id."
   (i3wm-command "exec --no-startup-id %s" program))
 
+(defun i3wm-workspace (workspace)
+  "I3wm-command WORKSPACE.
+
+Switch to the given i3 workspace"
+  (i3wm-command "workspace %s" workspace))
+
+(defun i3wm-workspace-numbered (number)
+  "I3wm-workspace-numbered NUMBER.
+
+Switch to the workspace with the given number."
+  (i3wm-command "workspace number %d" number))
+
+(defun i3wm-workspace-next ()
+  "I3wm-workspace-next.
+
+Switch to the next workspace."
+  (i3wm-command "workspace next"))
+
+(defun i3wm-workspace-prev ()
+  "I3wm-workspace-prev.
+
+Switch to the previous workspace."
+  (i3wm-command "workspace prev"))
+
+(defun i3wm-split-horizontally ()
+  "I3wm-split-horizontally.
+
+Split the current container horizontally."
+  (i3wm-command "split h"))
+
+(defun i3wm-split-vertically ()
+  "I3wm-split-vertically.
+
+Split the current container vertically."
+  (i3wm-command "split v"))
+
+(defun i3wm-stacking ()
+  "I3wm-stacking.
+
+Switch to a stacking layout."
+  (i3wm-command "layout stacking"))
+
+(defun i3wm-tabbed ()
+  "I3wm-tabbed.
+
+Switch to a tabbed layout."
+  (i3wm-command "layout tabbed"))
+
+(defun i3wm-fullscreen ()
+  "I3wm-fullscreen.
+
+Switch to a fullscreen layout."
+  (i3wm-command "fullscreen toggle"))
+
+(defun i3wm-floating ()
+  "I3wm-floating.
+
+Toggle container floating."
+  (i3wm-command  "floating toggle"))
+
 (provide 'i3wm)
 
 ;;; i3wm.el ends here
