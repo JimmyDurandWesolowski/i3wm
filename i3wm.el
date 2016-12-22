@@ -123,6 +123,27 @@ Switch to a fullscreen layout."
 Toggle container floating."
   (i3wm-command  "floating toggle"))
 
+;; Interactive commands
+
+(defun i3wm-switch-to-workspace (workspace)
+  "I3wm-switch-to-workspace WORKSPACE.
+
+If called interactively, prompt for and provide completion for
+workspace name and switch to it."
+  (interactive (list (completing-read "Workspace Name: "
+                                      (mapcar (lambda (workspace)
+                                                (cdr (assoc 'name workspace)))
+                                              (i3wm-get-workspaces)))))
+  (i3wm-workspace workspace))
+
+(defun i3wm-switch-to-workspace-number (number)
+  "I3wm-switch-to-workspace-number NUMBER.
+
+If called interactively, prompt for a workspace number and
+switch."
+  (interactive (list (read-number "Workspace Number: ")))
+  (i3wm-workspace-numbered number))
+
 (provide 'i3wm)
 
 ;;; i3wm.el ends here
