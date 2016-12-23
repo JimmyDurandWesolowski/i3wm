@@ -4,7 +4,7 @@
 
 ;; Author: Samuel W. Flint <swflint@flintfam.org>
 ;; Version: 0.5
-;; Package-requires: ((cl-lib "0.5") (json))
+;; Package-requires: ((json))
 ;; Keywords: convenience, exteensions
 ;; URL: https://git.flintfam.org/swflint/emacs-i3wm
 
@@ -16,7 +16,6 @@
 ;;; Code:
 
 (require 'json)
-(require 'cl-lib)
 
 ;;; Primitive functions:
 
@@ -125,6 +124,7 @@ Toggle container floating."
 
 ;; Interactive commands
 
+;;;###autoload
 (defun i3wm-switch-to-workspace (workspace)
   "I3wm-switch-to-workspace WORKSPACE.
 
@@ -136,6 +136,7 @@ workspace name and switch to it."
                                               (i3wm-get-workspaces)))))
   (i3wm-workspace workspace))
 
+;;;###autoload
 (defun i3wm-switch-to-workspace-number (number)
   "I3wm-switch-to-workspace-number NUMBER.
 
