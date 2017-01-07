@@ -5,11 +5,13 @@
 ;; Author: Samuel W. Flint <swflint@flintfam.org>
 ;; Version: 0.5
 ;; Package-requires: ((json))
-;; Keywords: convenience, exteensions
-;; URL: https://git.flintfam.org/swflint/emacs-i3wm
+;; Keywords: convenience, extensions
+;; URL: https://git.flintfam.org/swflint/emacs-i3
 
 ;;; Commentary:
 ;;
+;; This provides an interface to the i3 window manager, with a few
+;; pre-built accessors to the various i3 commands.
 
 
 
