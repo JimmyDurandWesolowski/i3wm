@@ -22,116 +22,81 @@
 ;;; Primitive functions:
 
 (defun i3wm-command (command &rest arguments)
-  "I3wm-command COMMAND &rest ARGUMENTS.
-
-Execute the givenn COMMAND with the given ARGUMENTS."
+  "Execute the given COMMAND with the given ARGUMENTS."
   (json-read-from-string
    (shell-command-to-string
-    (format "i3-msg \"%s\"" (apply #'format command arguments)))))
+    (format "i3-msg %s" (shell-quote-argument (apply #'format command arguments))))))
 
 (defun i3wm-get-workspaces ()
-  "I3wm-get-workspaces.
-
-List all workspaces."
+  "List all workspaces."
   (json-read-from-string
    (shell-command-to-string "i3-msg -t get_workspaces")))
 
 (defun i3wm-get-outputs ()
-  "I3wm-get-outputs.
-
-List all outputs."
+  "List all outputs."
   (json-read-from-string
    (shell-command-to-string "i3-msg -t get_outputs")))
 
 (defun i3wm-get-version ()
-  "I3wm-get-version.
-
-Retrieve i3 version."
+  "Retrieve i3 version."
   (json-read-from-string
    (shell-command-to-string "i3-msg -t get_version")))
 
 ;;; i3 commands
 
 (defun i3wm-exec (program)
-  "I3wm-exec PROGRAM.
-
-Executes the given PROGRAM."
+  "Execute the given PROGRAM."
   (i3wm-command "exec %s" program))
 
 (defun i3wm-exec-no-startup-id (program)
-  "I3wm-exec-no-startup-id PROGRAM.
-
-Execute the given PROGRAM with --no-startup-id."
+  "Execute the given PROGRAM with --no-startup-id."
   (i3wm-command "exec --no-startup-id %s" program))
 
 (defun i3wm-workspace (workspace)
-  "I3wm-command WORKSPACE.
-
-Switch to the given i3 workspace"
+  "Switch to the given i3 WORKSPACE."
   (i3wm-command "workspace %s" workspace))
 
 (defun i3wm-workspace-numbered (number)
-  "I3wm-workspace-numbered NUMBER.
-
-Switch to the workspace with the given number."
+  "Switch to the workspace with the given NUMBER."
   (i3wm-command "workspace number %d" number))
 
 (defun i3wm-workspace-next ()
-  "I3wm-workspace-next.
-
-Switch to the next workspace."
+  "Switch to the next workspace."
   (i3wm-command "workspace next"))
 
 (defun i3wm-workspace-prev ()
-  "I3wm-workspace-prev.
-
-Switch to the previous workspace."
+  "Switch to the previous workspace."
   (i3wm-command "workspace prev"))
 
 (defun i3wm-split-horizontally ()
-  "I3wm-split-horizontally.
-
-Split the current container horizontally."
+  "Split the current container horizontally."
   (i3wm-command "split h"))
 
 (defun i3wm-split-vertically ()
-  "I3wm-split-vertically.
-
-Split the current container vertically."
+  "Split the current container vertically."
   (i3wm-command "split v"))
 
 (defun i3wm-stacking ()
-  "I3wm-stacking.
-
-Switch to a stacking layout."
+  "Switch to a stacking layout."
   (i3wm-command "layout stacking"))
 
 (defun i3wm-tabbed ()
-  "I3wm-tabbed.
-
-Switch to a tabbed layout."
+  "Switch to a tabbed layout."
   (i3wm-command "layout tabbed"))
 
 (defun i3wm-fullscreen ()
-  "I3wm-fullscreen.
-
-Switch to a fullscreen layout."
+  "Switch to a fullscreen layout."
   (i3wm-command "fullscreen toggle"))
 
 (defun i3wm-floating ()
-  "I3wm-floating.
-
-Toggle container floating."
+  "Toggle container floating."
   (i3wm-command  "floating toggle"))
 
 ;; Interactive commands
 
 ;;;###autoload
 (defun i3wm-switch-to-workspace (workspace)
-  "I3wm-switch-to-workspace WORKSPACE.
-
-If called interactively, prompt for and provide completion for
-workspace name and switch to it."
+  "Prompt for and switch to a WORKSPACE."
   (interactive (list (completing-read "Workspace Name: "
                                       (mapcar (lambda (workspace)
                                                 (cdr (assoc 'name workspace)))
@@ -140,10 +105,7 @@ workspace name and switch to it."
 
 ;;;###autoload
 (defun i3wm-switch-to-workspace-number (number)
-  "I3wm-switch-to-workspace-number NUMBER.
-
-If called interactively, prompt for a workspace number and
-switch."
+  "Prompt for and switch to the workspace numbered NUMBER."
   (interactive (list (read-number "Workspace Number: ")))
   (i3wm-workspace-numbered number))
 
