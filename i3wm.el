@@ -4,7 +4,6 @@
 
 ;; Author: Samuel W. Flint <swflint@flintfam.org>
 ;; Version: 0.5
-;; Package-requires: ((json))
 ;; Keywords: convenience, extensions
 ;; URL: https://git.flintfam.org/swflint/emacs-i3
 
