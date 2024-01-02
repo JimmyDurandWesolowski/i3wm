@@ -36,24 +36,28 @@
 
 (defun i3wm-command (command &rest arguments)
   "Execute the given COMMAND with the given ARGUMENTS."
-  (json-read-from-string
-   (shell-command-to-string
-    (format "i3-msg %s" (shell-quote-argument (apply #'format command arguments))))))
+  (let ((default-directory temporary-file-directory))
+    (json-read-from-string
+     (shell-command-to-string
+      (format "i3-msg %s" (shell-quote-argument (apply #'format command arguments)))))))
 
 (defun i3wm-get-workspaces ()
   "List all workspaces."
-  (json-read-from-string
-   (shell-command-to-string "i3-msg -t get_workspaces")))
+  (let ((default-directory temporary-file-directory))
+    (json-read-from-string
+     (shell-command-to-string "i3-msg -t get_workspaces"))))
 
 (defun i3wm-get-outputs ()
   "List all outputs."
-  (json-read-from-string
-   (shell-command-to-string "i3-msg -t get_outputs")))
+  (let ((default-directory temporary-file-directory))
+    (json-read-from-string
+     (shell-command-to-string "i3-msg -t get_outputs"))))
 
 (defun i3wm-get-version ()
   "Retrieve i3 version."
-  (json-read-from-string
-   (shell-command-to-string "i3-msg -t get_version")))
+  (let ((default-directory temporary-file-directory))
+    (json-read-from-string
+     (shell-command-to-string "i3-msg -t get_version"))))
 
 ;;; i3 commands
 
@@ -125,3 +129,5 @@
 (provide 'i3wm)
 
 ;;; i3wm.el ends here
+
+(setq tramp-ignored-file-name-regexp "*:/run/user/*")
